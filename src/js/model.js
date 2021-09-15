@@ -7,6 +7,7 @@ export const state = {
   secTens: 0,
   minOnes: 0,
   minTens: 0,
+  saveSplits: {},
 };
 
 export const incrementTimer = function () {
@@ -36,9 +37,7 @@ export const resetTimer = function () {
 const _splitArr = [];
 
 export const pushSplit = function (split) {
-  console.log(split);
   _splitArr.push({ ...split });
-  console.log(_splitArr);
 };
 
 export const saveSplit = function (splitName) {
@@ -46,5 +45,7 @@ export const saveSplit = function (splitName) {
 };
 
 export const loadSplit = function () {
-  // const
+  const splits = { ...localStorage };
+  if (splits != {}) state.saveSplits = splits;
+  console.log(Object.values(state.saveSplits));
 };

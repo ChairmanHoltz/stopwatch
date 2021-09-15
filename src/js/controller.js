@@ -34,5 +34,6 @@ const init = function () {
     controlResetBtn
   );
   splitListView.addHandlerSaveBtn(controlSaveBtn);
+  model.loadSplit();
 };
 init();
