@@ -41,6 +41,10 @@ export const pushSplit = function (split) {
   console.log(_splitArr);
 };
 
-export const saveSplit = function () {
-  localStorage.setItem('split', JSON.stringify(_splitArr));
+export const saveSplit = function (splitName) {
+  localStorage.setItem(splitName, JSON.stringify(_splitArr));
+};
+
+export const loadSplit = function () {
+  // const
 };

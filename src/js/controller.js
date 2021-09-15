@@ -21,8 +21,9 @@ const controlResetBtn = function () {
   mainView.renderTime(model.state);
 };
 
-const controlSaveBtn = function () {
-  model.saveSplit();
+const controlSaveBtn = function (splitName) {
+  model.saveSplit(splitName);
+  splitListView.clear();
 };
 
 const init = function () {

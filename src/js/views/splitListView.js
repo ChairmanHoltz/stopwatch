@@ -17,9 +17,11 @@ class SplitListView {
 
   addHandlerSaveBtn(handler) {
     const save = document.querySelector('.save');
+    const splitName = document.querySelector('.input');
     save.addEventListener('click', function () {
       console.log('save');
-      handler();
+      handler(splitName.value);
+      splitName.value = '';
     });
   }
 }
