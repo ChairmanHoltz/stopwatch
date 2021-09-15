@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./src/css/style.css" />
+    <title>Stopwatch</title>
+
+    <script defer src="./src/js/controller.js" type="module"></script>
+  </head>
+  <body>
+    <div class="container">
+      <section class="center">
+        <div>STOPWATCH</div>
+        <div class="split_display"></div>
+        <div div class="timer">00:00.00</div>
+        <button class="start btn">Start</button>
+        <button class="stop btn" disabled>Stop</button>
+        <button class="split btn" disabled>Split</button>
+        <button class="reset btn" disabled>Reset</button>
+      </section>
+      <section class="saved_splits">
+        <h3>Saved Splits</h3>
+        <ol class="saved_splits saved_splits_list"></ol>
+      </section>
+      <section class="center split_list_container">
+        <h3 class="split_heading">Splits</h3>
+        <ol class="split_list"></ol>
+        <label class="small_txt no_margin" for="split_name">Split Name</label>
+        <input class="no_margin" type="text" name="split_name" />
+        <button class="save btn">Save</button>
+      </section>
+    </div>
+  </body>
+</html>
