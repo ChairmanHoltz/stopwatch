@@ -7,7 +7,7 @@ export const state = {
   secTens: 0,
   minOnes: 0,
   minTens: 0,
-  savedSplits: {},
+  savedSplits: [],
 };
 
 export const incrementTimer = function () {
@@ -41,11 +41,15 @@ export const pushSplit = function (split) {
 };
 
 export const saveSplit = function (splitName) {
-  localStorage.setItem(splitName, JSON.stringify(_splitArr));
+  try {
+    localStorage.setItem(splitName, JSON.stringify(_splitArr));
+  } catch (err) {
+    throw new Error('Storage is full. Please delete splits to save new ones.');
+  }
 };
 
 export const loadSplit = function () {
   if (localStorage.length === 0) return;
   state.savedSplits = Object.entries({ ...localStorage });
-  // console.log(state.savedSplits);
+  console.log(state.savedSplits);
 };

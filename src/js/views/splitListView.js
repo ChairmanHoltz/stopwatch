@@ -15,6 +15,11 @@ class SplitListView {
     );
   }
 
+  renderError(err) {
+    const errorDisplay = this._parentEl.querySelector('.error');
+    errorDisplay.textContent = err;
+  }
+
   addHandlerSaveBtn(handler) {
     const save = document.querySelector('.save');
     const splitBtn = document.querySelector('.split');

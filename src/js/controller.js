@@ -23,10 +23,14 @@ const controlResetBtn = function () {
 };
 
 const controlSaveBtn = function (splitName) {
-  model.saveSplit(splitName);
-  splitListView.clear();
-  model.loadSplit();
-  savedSplitsView.displaySavedSplit(model.state.savedSplits);
+  try {
+    model.saveSplit(splitName);
+    splitListView.clear();
+    model.loadSplit();
+    savedSplitsView.displaySavedSplit(model.state.savedSplits);
+  } catch (err) {
+    splitListView.renderError(err);
+  }
 };
 
 const init = function () {
