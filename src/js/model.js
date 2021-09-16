@@ -46,6 +46,6 @@ export const saveSplit = function (splitName) {
 
 export const loadSplit = function () {
   if (localStorage.length === 0) return;
-  const splits = Object.entries({ ...localStorage });
-  console.log(splits);
+  state.savedSplits = Object.entries({ ...localStorage });
+  // console.log(state.savedSplits);
 };

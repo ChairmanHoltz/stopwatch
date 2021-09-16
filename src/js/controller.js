@@ -2,6 +2,7 @@ import * as model from './model.js';
 import mainView from './views/mainView.js';
 import splitView from './views/splitView.js';
 import splitListView from './views/splitListView.js';
+import savedSplitsView from './views/savedSplitsView.js';
 
 const controlStartBtn = function () {
   mainView.renderTime(model.state);
@@ -24,6 +25,8 @@ const controlResetBtn = function () {
 const controlSaveBtn = function (splitName) {
   model.saveSplit(splitName);
   splitListView.clear();
+  model.loadSplit();
+  savedSplitsView.displaySavedSplit(model.state.savedSplits);
 };
 
 const init = function () {
@@ -35,5 +38,6 @@ const init = function () {
   );
   splitListView.addHandlerSaveBtn(controlSaveBtn);
   model.loadSplit();
+  savedSplitsView.displaySavedSplit(model.state.savedSplits);
 };
 init();

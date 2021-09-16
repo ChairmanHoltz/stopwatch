@@ -1,8 +1,12 @@
 class SavedSplitsView {
-  _parentEl = document.querySelector('.saved_split_list');
+  _parentEl = document.querySelector('.saved_splits_list');
 
-  displaySavedSplit() {
-    this._parentEl.insertAdjacentElement('beforeend');
+  displaySavedSplit(splitData) {
+    console.log(splitData);
+    if (Object.keys(splitData).length === 0) return;
+    splitData.forEach(split => {
+      this._parentEl.insertAdjacentHTML('beforeend', `<li>${split[0]}</li>`);
+    });
   }
 }
 
