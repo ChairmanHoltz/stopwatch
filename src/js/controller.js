@@ -5,21 +5,22 @@ import splitListView from './views/splitListView.js';
 import savedSplitsView from './views/savedSplitsView.js';
 
 const controlStartBtn = function () {
-  mainView.renderTime(model.state);
+  mainView.renderTime(model.state.clock);
   model.incrementTimer();
 };
 
 const controlStopBtn = function () {};
 
 const controlSplitBtn = function () {
-  splitView.displaySplit(model.state);
-  splitListView.createSplitList(model.state);
-  model.pushSplit(model.state);
+  splitView.displaySplit(model.state.clock);
+  splitListView.createSplitList(model.state.clock);
+  model.pushSplit(model.state.clock);
 };
 
 const controlResetBtn = function () {
+  model.clearSplits();
   model.resetTimer();
-  mainView.renderTime(model.state);
+  mainView.renderTime(model.state.clock);
 };
 
 const controlSaveBtn = function (splitName) {

@@ -17,6 +17,7 @@ class SplitListView {
 
   renderError(err) {
     const errorDisplay = this._parentEl.querySelector('.error');
+    errorDisplay.classList.add('fade-in-text');
     errorDisplay.textContent = err;
   }
 

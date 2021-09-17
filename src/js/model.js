@@ -1,48 +1,54 @@
 'use strict';
 
 export const state = {
-  secTenths: 0,
-  secHundreths: 0,
-  secOnes: 0,
-  secTens: 0,
-  minOnes: 0,
-  minTens: 0,
+  clock: {
+    secTenths: 0,
+    secHundreths: 0,
+    secOnes: 0,
+    secTens: 0,
+    minOnes: 0,
+    minTens: 0,
+  },
   savedSplits: [],
+  splitArr: [],
 };
 
 export const incrementTimer = function () {
-  state.secHundreths += 1;
-  if (state.secHundreths === 10) {
-    state.secTenths += 1;
-    state.secHundreths = 0;
+  state.clock.secHundreths += 1;
+  if (state.clock.secHundreths === 10) {
+    state.clock.secTenths += 1;
+    state.clock.secHundreths = 0;
   }
-  if (state.secTenths === 10) {
-    state.secOnes += 1;
-    state.secTenths = 0;
+  if (state.clock.secTenths === 10) {
+    state.clock.secOnes += 1;
+    state.clock.secTenths = 0;
   }
-  if (state.secOnes === 10) {
-    state.secTens += 1;
-    state.secOnes = 0;
+  if (state.clock.secOnes === 10) {
+    state.clock.secTens += 1;
+    state.clock.secOnes = 0;
   }
-  if (state.secTens === 6) {
-    state.secTens = 0;
-    state.minOnes += 1;
+  if (state.clock.secTens === 6) {
+    state.clock.secTens = 0;
+    state.clock.minOnes += 1;
   }
 };
 
 export const resetTimer = function () {
-  Object.keys(state).forEach(key => (state[key] = 0));
+  console.log(Object.keys(state.clock));
+  Object.keys(state.clock).forEach(key => (state.clock[key] = 0));
+  console.log(state.clock);
 };
-
-const _splitArr = [];
 
 export const pushSplit = function (split) {
-  _splitArr.push({ ...split });
+  state.splitArr.push({ ...split });
 };
 
+export const clearSplits = () => (state.splitArr = []);
+
 export const saveSplit = function (splitName) {
+  if (state.splitArr.length === 0) return;
   try {
-    localStorage.setItem(splitName, JSON.stringify(_splitArr));
+    localStorage.setItem(splitName, JSON.stringify(state.splitArr));
   } catch (err) {
     throw new Error('Storage is full. Please delete splits to save new ones.');
   }
@@ -51,5 +57,4 @@ export const saveSplit = function (splitName) {
 export const loadSplit = function () {
   if (localStorage.length === 0) return;
   state.savedSplits = Object.entries({ ...localStorage });
-  console.log(state.savedSplits);
 };
