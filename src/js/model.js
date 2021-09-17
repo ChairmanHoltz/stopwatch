@@ -9,6 +9,7 @@ export const state = {
     minOnes: 0,
     minTens: 0,
   },
+  splitCounter: 0,
   savedSplits: [],
   splitArr: [],
 };
@@ -38,6 +39,15 @@ export const resetTimer = function () {
   Object.keys(state.clock).forEach(key => (state.clock[key] = 0));
   console.log(state.clock);
 };
+
+export const updateSplitCount = function (type) {
+  if (type === 'up') state.splitCounter += 1;
+  if (type === 'reset') state.splitCounter = 0;
+};
+
+// export const resetSplitCount = function () {
+//   state.splitCounter = 0;
+// };
 
 export const pushSplit = function (split) {
   state.splitArr.push({ ...split });

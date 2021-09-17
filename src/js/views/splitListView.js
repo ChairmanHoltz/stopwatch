@@ -1,4 +1,4 @@
-import mainView from './mainView.js';
+import splitView from './splitView.js';
 
 class SplitListView {
   _parentEl = document.querySelector('.split_list_container');
@@ -23,12 +23,13 @@ class SplitListView {
 
   addHandlerSaveBtn(handler) {
     const save = document.querySelector('.save');
-    const splitBtn = document.querySelector('.split');
+    // const splitBtn = document.querySelector('.split');
     const splitName = document.querySelector('.input');
     save.addEventListener('click', function () {
-      splitBtn.disabled = true;
+      // splitBtn.disabled = true;
       handler(splitName.value);
       splitName.value = '';
+      // splitView.counter = 0;
     });
   }
 }
