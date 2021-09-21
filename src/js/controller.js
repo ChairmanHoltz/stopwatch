@@ -3,6 +3,7 @@ import mainView from './views/mainView.js';
 import splitView from './views/splitView.js';
 import splitListView from './views/splitListView.js';
 import savedSplitsView from './views/savedSplitsView.js';
+import selectedSplitView from './views/selectedSplitView.js';
 
 const controlStartBtn = function () {
   mainView.renderTime(model.state.clock);
@@ -37,6 +38,11 @@ const controlSaveBtn = function (splitName) {
   }
 };
 
+const controlSavedSplitsLinks = function (splitNumber) {
+  console.log('saved split link');
+  selectedSplitView.displaySelectedSplit(model.state.savedSplits[splitNumber]);
+};
+
 const init = function () {
   mainView.addHandlersBtns(
     controlStartBtn,
@@ -47,5 +53,6 @@ const init = function () {
   splitListView.addHandlerSaveBtn(controlSaveBtn);
   model.loadSplit();
   savedSplitsView.displaySavedSplit(model.state.savedSplits);
+  savedSplitsView.addHandlerSavedSplits(controlSavedSplitsLinks);
 };
 init();

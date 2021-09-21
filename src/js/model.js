@@ -87,3 +87,7 @@ export const getDateTimeOfSave = function () {
     time: now[4].slice(0, 5),
   };
 };
+
+// export const getSelectedSplitNumber = function() {
+//   const selectedSplitNumber =
+// }
