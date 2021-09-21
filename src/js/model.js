@@ -58,6 +58,7 @@ export const clearSplits = () => (state.splitArr = []);
 export const saveSplit = function (splitName) {
   if (state.splitArr.length === 0) return;
   try {
+    state.splitArr.push(getDateTimeOfSave());
     localStorage.setItem(splitName, JSON.stringify(state.splitArr));
   } catch (err) {
     throw new Error('Storage is full. Please delete splits to save new ones.');
@@ -66,5 +67,23 @@ export const saveSplit = function (splitName) {
 
 export const loadSplit = function () {
   if (localStorage.length === 0) return;
-  state.savedSplits = Object.entries({ ...localStorage });
+  console.log(localStorage);
+  // state.savedSplits = Object.entries({ ...localStorage });
+  const rawSavedSplits = Object.entries({ ...localStorage });
+  console.log(rawSavedSplits);
+  rawSavedSplits.forEach(split => {
+    split[1] = JSON.parse(split[1]);
+  });
+  state.savedSplits = rawSavedSplits;
+  console.log(state.savedSplits);
+};
+
+export const getDateTimeOfSave = function () {
+  const now = new Date().toString().split(' ');
+  return {
+    day: now[2],
+    month: now[1],
+    year: now[3],
+    time: now[4].slice(0, 5),
+  };
 };
