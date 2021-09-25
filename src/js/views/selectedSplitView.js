@@ -6,6 +6,7 @@ class SelectedSplitView {
   _generateHTML(split) {
     let html = '';
     split[1].forEach((time, i) => {
+      if (time.city) return;
       if (i === split[1].length - 1) return;
       const formattedTime = `<li>${time.minTens}${time.minOnes}:${time.secTens}${time.secOnes}.${time.secTenths}${time.secHundreths}</li>`;
       html += formattedTime;

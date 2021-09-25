@@ -27,19 +27,18 @@ const controlResetBtn = function () {
 };
 
 const controlSaveBtn = function (splitName) {
-  try {
-    model.saveSplit(splitName);
-    splitListView.clear();
-    model.loadSplit();
-    savedSplitsView.displaySavedSplit(model.state.savedSplits);
-    model.clearSplits();
-  } catch (err) {
-    splitListView.renderError(err);
-  }
+  // try {
+  model.saveSplit(splitName);
+  splitListView.clear();
+  model.loadSplit();
+  savedSplitsView.displaySavedSplit(model.state.savedSplits);
+  model.clearSplits();
+  // } catch (err) {
+  // splitListView.renderError(err);
+  // }
 };
 
 const controlSavedSplitsLinks = function (splitNumber) {
-  console.log('saved split link');
   selectedSplitView.displaySelectedSplit(model.state.savedSplits[splitNumber]);
 };
 

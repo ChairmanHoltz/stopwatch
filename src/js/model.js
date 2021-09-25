@@ -12,6 +12,7 @@ export const state = {
   splitCounter: 0,
   savedSplits: [],
   splitArr: [],
+  location: [],
 };
 
 export const incrementTimer = function () {
@@ -45,20 +46,22 @@ export const updateSplitCount = function (type) {
   if (type === 'reset') state.splitCounter = 0;
 };
 
-// export const resetSplitCount = function () {
-//   state.splitCounter = 0;
-// };
-
-export const pushSplit = function (split) {
+export const pushSplit = async function (split) {
+  if (state.splitCounter === 1) {
+    await revGeoCoding();
+  }
   state.splitArr.push({ ...split });
+  console.log(state.splitArr);
 };
 
 export const clearSplits = () => (state.splitArr = []);
 
-export const saveSplit = function (splitName) {
+export const saveSplit = async function (splitName) {
   if (state.splitArr.length === 0) return;
   try {
     state.splitArr.push(getDateTimeOfSave());
+    // await revGeoCoding();
+    console.log(state.splitArr);
     localStorage.setItem(splitName, JSON.stringify(state.splitArr));
   } catch (err) {
     throw new Error('Storage is full. Please delete splits to save new ones.');
@@ -68,17 +71,15 @@ export const saveSplit = function (splitName) {
 export const loadSplit = function () {
   if (localStorage.length === 0) return;
   console.log(localStorage);
-  // state.savedSplits = Object.entries({ ...localStorage });
   const rawSavedSplits = Object.entries({ ...localStorage });
   console.log(rawSavedSplits);
   rawSavedSplits.forEach(split => {
     split[1] = JSON.parse(split[1]);
   });
   state.savedSplits = rawSavedSplits;
-  console.log(state.savedSplits);
 };
 
-export const getDateTimeOfSave = function () {
+const getDateTimeOfSave = function () {
   const now = new Date().toString().split(' ');
   return {
     day: now[2],
@@ -88,6 +89,23 @@ export const getDateTimeOfSave = function () {
   };
 };
 
-// export const getSelectedSplitNumber = function() {
-//   const selectedSplitNumber =
-// }
+const getLocation = function () {
+  return new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+};
+
+export const revGeoCoding = async function () {
+  const curLocation = await getLocation();
+  const { latitude: lat, longitude: lng } = curLocation.coords;
+
+  const revGeo = await fetch(
+    `https://geocode.xyz/${lat},${lng}?geoit=json&auth=169542281086562212905x84985`
+  );
+  const geoJSON = await revGeo.json();
+  state.splitArr.push({ city: geoJSON.city, state: geoJSON.state });
+  // return {
+  // city: geoJSON.city,
+  // state: geoJSON.state,
+  // };
+};
