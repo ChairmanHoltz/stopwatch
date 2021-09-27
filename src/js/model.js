@@ -47,21 +47,16 @@ export const updateSplitCount = function (type) {
 };
 
 export const pushSplit = async function (split) {
-  if (state.splitCounter === 1) {
-    await revGeoCoding();
-  }
   state.splitArr.push({ ...split });
   console.log(state.splitArr);
 };
 
 export const clearSplits = () => (state.splitArr = []);
 
-export const saveSplit = async function (splitName) {
+export const saveSplit = function (splitName) {
   if (state.splitArr.length === 0) return;
   try {
     state.splitArr.push(getDateTimeOfSave());
-    // await revGeoCoding();
-    console.log(state.splitArr);
     localStorage.setItem(splitName, JSON.stringify(state.splitArr));
   } catch (err) {
     throw new Error('Storage is full. Please delete splits to save new ones.');
@@ -89,14 +84,14 @@ const getDateTimeOfSave = function () {
   };
 };
 
-const getLocation = function () {
+const _getLocation = function () {
   return new Promise((resolve, reject) => {
     navigator.geolocation.getCurrentPosition(resolve, reject);
   });
 };
 
 export const revGeoCoding = async function () {
-  const curLocation = await getLocation();
+  const curLocation = await _getLocation();
   const { latitude: lat, longitude: lng } = curLocation.coords;
 
   const revGeo = await fetch(
@@ -104,8 +99,4 @@ export const revGeoCoding = async function () {
   );
   const geoJSON = await revGeo.json();
   state.splitArr.push({ city: geoJSON.city, state: geoJSON.state });
-  // return {
-  // city: geoJSON.city,
-  // state: geoJSON.state,
-  // };
 };

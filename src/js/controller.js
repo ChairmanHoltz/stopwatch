@@ -26,16 +26,17 @@ const controlResetBtn = function () {
   model.updateSplitCount('reset');
 };
 
-const controlSaveBtn = function (splitName) {
-  // try {
-  model.saveSplit(splitName);
-  splitListView.clear();
-  model.loadSplit();
-  savedSplitsView.displaySavedSplit(model.state.savedSplits);
-  model.clearSplits();
-  // } catch (err) {
-  // splitListView.renderError(err);
-  // }
+const controlSaveBtn = async function (splitName) {
+  try {
+    await model.revGeoCoding();
+    model.saveSplit(splitName);
+    splitListView.clear();
+    model.loadSplit();
+    savedSplitsView.displaySavedSplit(model.state.savedSplits);
+    model.clearSplits();
+  } catch (err) {
+    splitListView.renderError(err);
+  }
 };
 
 const controlSavedSplitsLinks = function (splitNumber) {

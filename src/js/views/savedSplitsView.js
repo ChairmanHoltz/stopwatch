@@ -22,8 +22,10 @@ class SavedSplitsView {
           split[1][split[1].length - 1].day
         } ${split[1][split[1].length - 1].month}. ${
           split[1][split[1].length - 1].year
-        }: ${split[1][split[1].length - 1].time.slice(0, 5)}hr<br>\
-        ${split[1][0].city}, ${split[1][0].state}</li>`
+        }: ${split[1][split[1].length - 1].time.slice(0, 5)}hr<br>
+        ${split[1][split[1].length - 2].city}, ${
+          split[1][split[1].length - 2].state
+        }</li>`
       );
     });
   }
