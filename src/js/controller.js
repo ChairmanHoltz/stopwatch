@@ -13,7 +13,7 @@ const controlStartBtn = function () {
 const controlStopBtn = function () {};
 
 const controlSplitBtn = function () {
-  model.updateSplitCount('up');
+  model.updateSplitCount('increase');
   splitView.displaySplit(model.state.clock, model.state.splitCounter);
   splitListView.createSplitList(model.state.clock);
   model.pushSplit(model.state.clock);

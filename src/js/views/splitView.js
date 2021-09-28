@@ -1,6 +1,4 @@
 class SplitView {
-  // counter = 0;
-
   displaySplit(time, counter) {
     const splitDisplay = document.querySelector('.split_display');
     splitDisplay.classList.remove('fade-out-text');

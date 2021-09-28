@@ -4,10 +4,8 @@ class SavedSplitsView {
   addHandlerSavedSplits(handler) {
     this._parentEl.addEventListener('click', function (e) {
       const clicked = e.target;
-      console.log(clicked);
       if (!clicked.classList.contains('saved_list_item')) return;
       const splitNumber = clicked.dataset.splitNumber;
-      console.log(splitNumber);
       handler(splitNumber);
     });
   }

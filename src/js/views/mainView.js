@@ -1,4 +1,3 @@
-import splitView from './splitView.js';
 import splitListView from './splitListView.js';
 
 class mainView {
@@ -63,7 +62,6 @@ class mainView {
         activateBtns(start);
         disableBtns(stop, reset, split);
         splitListView.clear();
-        splitView.counter = 0;
         timer.textContent = '00:00.00';
       }
     });

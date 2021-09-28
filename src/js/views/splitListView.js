@@ -23,13 +23,10 @@ class SplitListView {
 
   addHandlerSaveBtn(handler) {
     const save = document.querySelector('.save');
-    // const splitBtn = document.querySelector('.split');
     const splitName = document.querySelector('.input');
     save.addEventListener('click', function () {
-      // splitBtn.disabled = true;
       handler(splitName.value);
       splitName.value = '';
-      // splitView.counter = 0;
     });
   }
 }
