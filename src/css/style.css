@@ -69,11 +69,9 @@
   margin-left: 2em;
 }
 
-.selected_split_items {
-  font-size: 0.7em;
-}
-
-.error {
+.selected_split_items,
+.error,
+.selected_split {
   font-size: 0.7em;
 }
 

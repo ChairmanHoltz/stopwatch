@@ -77,10 +77,8 @@ export const loadSplit = function () {
 const getDateTimeOfSave = function () {
   const now = new Date().toString().split(' ');
   return {
-    day: now[2],
-    month: now[1],
-    year: now[3],
-    time: now[4].slice(0, 5),
+    // date: `${this.day} ${this.month} ${this.year}: ${this.time}hr`,
+    date: `${now[2]} ${now[1]} ${now[3]}: ${now[4].slice(0, 5)}hr`,
   };
 };
 
@@ -98,5 +96,10 @@ export const revGeoCoding = async function () {
     `https://geocode.xyz/${lat},${lng}?geoit=json&auth=169542281086562212905x84985`
   );
   const geoJSON = await revGeo.json();
-  state.splitArr.push({ city: geoJSON.city, state: geoJSON.state });
+  state.splitArr.push({
+    location: `${
+      geoJSON.city.slice(0, 1).toUpperCase() +
+      geoJSON.city.slice(1).toLowerCase()
+    }, ${geoJSON.state.toUpperCase()}`,
+  });
 };
